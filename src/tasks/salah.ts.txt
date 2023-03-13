@@ -1,0 +1,21 @@
+export interface Task {
+    id: string;
+    title:string;
+    description: string;
+    status: TaskStatus;
+};
+
+export enum TaskStatus{
+    OPEN = 'OPEN',
+    IN_PROGRESSS = 'IN_PROGRESS',
+    DONE = 'DONE',
+};
+
+function editTaskById(id:string,propertyKey:string,propertyValue:any):Task{
+    //Do not Inline or you will exceed stack limit.
+    var task : Task;
+    task = this._tasks.find(task => task.id === id);
+    if((propertyKey in Object.keys(task)) && propertyKey != 'id')
+        task[propertyKey]=propertyValue;
+    return task;
+}
